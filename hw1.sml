@@ -13,7 +13,7 @@ fun is_older (dateA:int*int*int, dateB:int*int*int) =
       orelse (#2 dateA) < (#2 dateB) 
       orelse (#3 dateA) < (#3 dateB)
 
-fun number_in_month(date_list:(int*int*int) list, month) = 
+fun number_in_month(date_list:(int*int*int) list, month: int) = 
    let fun count(cur_val: int, cur_list: (int*int*int) list) =
       if null cur_list
       then cur_val
@@ -24,6 +24,18 @@ fun number_in_month(date_list:(int*int*int) list, month) =
    in
       count(0, date_list)
    end
+
+fun number_in_months(date_list:(int*int*int) list, month_list: int list) = 
+   let fun count_month(cur_val: int, cur_month_list: int list) =
+      if null cur_month_list
+      then cur_val
+      else
+         count_month(cur_val + number_in_month(date_list, hd cur_month_list),
+          tl cur_month_list)
+   in
+      count_month(0,month_list)
+   end
+   
 
       
 
