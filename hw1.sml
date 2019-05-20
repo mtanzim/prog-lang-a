@@ -37,7 +37,29 @@ fun number_in_months(date_list:(int*int*int) list, month_list: int list) =
    end
    
 
+fun dates_in_month(date_list:(int*int*int) list, month: int) = 
+   let fun append(cur_valid_list: (int*int*int) list, cur_list: (int*int*int) list) =
+      if null cur_list
+      (* rev may not be allowed *)
+      then rev cur_valid_list
+      else 
+         if #2 (hd cur_list) = month
+         then append(hd cur_list::cur_valid_list,tl cur_list)
+         else append(cur_valid_list, tl cur_list)
+   in
+      append([], date_list)
+   end
+
       
 
-         
+fun dates_in_months(date_list:(int*int*int) list, month_list: int list) = 
+   let fun append_month(cur_val_list: (int*int*int) list, cur_month_list: int list) =
+      if null cur_month_list
+      then cur_val_list
+      else
+         append_month(cur_val_list @ dates_in_month(date_list, hd cur_month_list),
+          tl cur_month_list)
+   in
+      append_month([],month_list)
+   end
 
