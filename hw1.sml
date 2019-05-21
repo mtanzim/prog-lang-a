@@ -1,12 +1,13 @@
 (* year, month, date *)
-fun is_older_old (dateA:int*int*int, dateB:int*int*int) = 
+
+(* fun is_older_old (dateA:int*int*int, dateB:int*int*int) = 
    if (#1 dateA) < (#1 dateB)
    then true
    else
       if (#2 dateA) < (#2 dateB)
       then true
       else 
-         (#3 dateA) < (#3 dateB)
+         (#3 dateA) < (#3 dateB) *)
 
 fun is_older (dateA:int*int*int, dateB:int*int*int) = 
    (#1 dateA) < (#1 dateB) 
@@ -75,3 +76,5 @@ fun get_nth(str_list:string list, pos: int) =
       count_pos(str_list, 0)
    end
 
+fun number_before_reaching_sum (sum: int, num_list: int list) =
+   0
