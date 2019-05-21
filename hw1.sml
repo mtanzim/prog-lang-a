@@ -63,3 +63,15 @@ fun dates_in_months(date_list:(int*int*int) list, month_list: int list) =
       append_month([],month_list)
    end
 
+fun get_nth(str_list:string list, pos: int) = 
+   let fun count_pos(cur_list: string list, cur_pos: int ) = 
+      if null cur_list
+      then "BAD"
+      else
+         if cur_pos = pos -1
+         then hd cur_list
+         else count_pos(tl cur_list, cur_pos + 1)
+   in
+      count_pos(str_list, 0)
+   end
+
