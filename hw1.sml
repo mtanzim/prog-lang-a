@@ -1,14 +1,7 @@
+(* Tanzim Mokammel *)
+(* mtanzim@gmail.com *)
+
 (* year, month, date *)
-
-(* fun is_older_old (dateA:int*int*int, dateB:int*int*int) = 
-   if (#1 dateA) < (#1 dateB)
-   then true
-   else
-      if (#2 dateA) < (#2 dateB)
-      then true
-      else 
-         (#3 dateA) < (#3 dateB) *)
-
 fun is_older (dateA:int*int*int, dateB:int*int*int) = 
    (#1 dateA) < (#1 dateB) 
       orelse (#2 dateA) < (#2 dateB) 
@@ -76,5 +69,41 @@ fun get_nth(str_list:string list, pos: int) =
       count_pos(str_list, 0)
    end
 
+fun date_to_string(date:int*int*int) =  
+   let val month_lookup = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+   ]
+   in 
+      get_nth(month_lookup, #2 date) ^ " " ^
+         Int.toString (#3 date) ^ ", " ^
+         Int.toString (#1 date)  
+   end
+
+(* all numbers are positive in in num_list *)
 fun number_before_reaching_sum (sum: int, num_list: int list) =
-   0
+   let fun sum_list(cur_list: int list, cur_sum: int) = 
+      (* basic error checking to prevent overflow, 
+      not required by assignment *)
+      if null (tl cur_list)
+      then ~1
+      else
+         if hd (tl cur_list) + cur_sum >= sum
+         then hd cur_list
+         else sum_list(tl cur_list, cur_sum + hd (tl cur_list))
+   in
+      if null num_list
+      then ~1
+      else
+         sum_list(num_list, hd num_list)
+   end

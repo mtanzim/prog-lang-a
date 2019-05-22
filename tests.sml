@@ -49,12 +49,20 @@ val test6h = get_nth (["hi", "there", "how", "are", "you"], 5) = "you"
 val test6i = get_nth (["hi"], 1) = "hi"
 val test6j = get_nth (["hi", "there", "how", "are", "you"], ~12) = "BAD"
 
-val test8 = number_before_reaching_sum (10, [1,2,3,4,5]) = 3
+val test7a = date_to_string (2013, 6, 1) = "June 1, 2013"
+val test7b = date_to_string (2013, 7, 1) = "July 1, 2013"
+val test7c = date_to_string (2012, 1, 31) = "January 31, 2012"
 
-(* val test7 = date_to_string (2013, 6, 1) = "June 1, 2013"
+val test8a = number_before_reaching_sum (10, [1,2,3,4,5]) = 3
+val test8b = number_before_reaching_sum (11, [1,2,3,4,5]) = 4
+val test8c = number_before_reaching_sum (19, [1,2,3,4,5]) = ~1
+val test8d = number_before_reaching_sum (3, [1,2,3,4,5]) = 1
+val test8e = number_before_reaching_sum (2, [1,2,3,4,5]) = 1
+val test8f = number_before_reaching_sum (3, []) = ~1
 
 
-val test9 = what_month 70 = 3
+
+(* val test9 = what_month 70 = 3
 
 val test10 = month_range (31, 34) = [1,2,2,2]
 
