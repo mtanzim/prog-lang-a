@@ -11,6 +11,7 @@ val test1d = is_older ((2019,5,18),(2019,11,18)) = true
 val test1e = is_older ((2019,11,11),(2019,11,18)) = true
 val test1f = is_older ((2019,11,21),(2019,11,18)) = false
 val test1g = is_older ((2019,11,21),(2019,11,21)) = false
+val test1h = is_older ((2011,3,31),(2011,4,28)) = true
 
 val test2a = number_in_month ([(2012,2,28),(2013,12,1)],2) = 1
 val test2b = number_in_month ([(2012,12,28),(2013,12,1)],12) = 2
@@ -73,4 +74,6 @@ val test10b = month_range (32, 34) = [2,2,2]
 val test10c = month_range (32, 32) = [2]
 val test10d = month_range (33, 32) = []
 
-(* val test11 = oldest([(2012,2,28),(2011,3,31),(2011,4,28)]) = SOME (2011,3,31) *)
+val test11a = oldest([(2020,2,28),(2011,3,31),(2011,4,28)]) = SOME (2011,3,31)
+(* val test11b = oldest([(2020,2,28),(2011,3,31),(2011,4,28)]) = SOME (2020,2,28) *)
+(* val test11c = oldest([(2020,2,28),(2011,3,31),(2011,4,28)]) = SOME (2011,4,28) *)
