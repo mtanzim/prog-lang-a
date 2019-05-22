@@ -91,19 +91,38 @@ fun date_to_string(date:int*int*int) =
    end
 
 (* all numbers are positive in in num_list *)
+(* return position n *)
 fun number_before_reaching_sum (sum: int, num_list: int list) =
-   let fun sum_list(cur_list: int list, cur_sum: int) = 
+   let fun sum_list(cur_list: int list, cur_sum: int, cur_pos: int) = 
       (* basic error checking to prevent overflow, 
       not required by assignment *)
-      if null (tl cur_list)
+      if null cur_list
       then ~1
       else
-         if hd (tl cur_list) + cur_sum >= sum
-         then hd cur_list
-         else sum_list(tl cur_list, cur_sum + hd (tl cur_list))
+         if hd cur_list + cur_sum >= sum
+         (* then hd cur_list *)
+         then cur_pos - 1
+         else sum_list(tl cur_list, cur_sum + hd cur_list, cur_pos + 1)
    in
-      if null num_list
-      then ~1
-      else
-         sum_list(num_list, hd num_list)
+      sum_list(num_list, 0, 1)
+   end
+
+
+fun what_month(day: int) = 
+   let val days_in_month = [
+      31,
+      28,
+      31,
+      30,
+      31,
+      30,
+      31,
+      31,
+      30,
+      31,
+      30,
+      31
+   ]
+   in
+      number_before_reaching_sum(day, days_in_month) + 1
    end
