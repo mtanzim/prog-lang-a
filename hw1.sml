@@ -4,39 +4,21 @@
 (* year, month, date *)
 fun is_older (dateA:int*int*int, dateB:int*int*int) = 
    (#1 dateA) < (#1 dateB) 
-      orelse (#2 dateA) < (#2 dateB) 
-      orelse (#3 dateA) < (#3 dateB)
-
-(* fun oldest(date_list:(int*int*int) list) = 
-   let fun track_oldest(cur_oldest:(int*int*int) list, cur_list: (int*int*int) list ) = 
-      (* print "" ^ Int.toString (cur_oldest); *)
-      if null cur_list
-      then 
-         SOME (hd cur_oldest)
-      else
-         if is_older(hd cur_oldest, hd cur_list)
-         then track_oldest (cur_oldest, tl cur_list)
-         else track_oldest (hd cur_list::cur_oldest, tl cur_list)
-   in
-      if null date_list
-      then NONE
-      else
-         track_oldest(hd date_list::[], tl date_list)
-   end *)
+      orelse 
+         (#1 dateA) = (#1 dateB) andalso  (#2 dateA) < (#2 dateB) 
+      orelse 
+         (#1 dateA) = (#1 dateB) andalso  (#2 dateA) = (#2 dateB) andalso  (#3 dateA) < (#3 dateB)
 
 fun oldest(date_list:(int*int*int) list) = 
    if null date_list
    then NONE
-   else NONE
-   (* else
+   else
       let val oldest_date = oldest(tl date_list)
       in
-         if oldest_date = NONE
-         then SOME (hd date_list)
-         else if is_older(hd date_list, hd oldest_date)
-         then SOME (hd date_list)
-         else oldest_date
-      end *)
+         if isSome oldest_date andalso is_older(valOf oldest_date, hd date_list)
+         then oldest_date
+         else SOME (hd date_list)
+      end
 
 
 fun number_in_month(date_list:(int*int*int) list, month: int) = 

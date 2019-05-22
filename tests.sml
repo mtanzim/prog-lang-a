@@ -4,7 +4,8 @@
 (* All the tests should evaluate to true. For example, the REPL should say: val test1 = true : bool *)
 
 
-val test1a = is_older ((1,2,3),(2,3,4)) = true
+val test1m = is_older ((1,2,3),(2,3,4)) = true
+val test1a = is_older ((5,4,4),(4,5,4)) = false
 val test1b = is_older ((2019,12,18),(2018,12,18)) = false
 val test1c = is_older ((2019,12,18),(2019,11,18)) = false
 val test1d = is_older ((2019,5,18),(2019,11,18)) = true
@@ -75,5 +76,3 @@ val test10c = month_range (32, 32) = [2]
 val test10d = month_range (33, 32) = []
 
 val test11a = oldest([(2020,2,28),(2011,3,31),(2011,4,28)]) = SOME (2011,3,31)
-(* val test11b = oldest([(2020,2,28),(2011,3,31),(2011,4,28)]) = SOME (2020,2,28) *)
-(* val test11c = oldest([(2020,2,28),(2011,3,31),(2011,4,28)]) = SOME (2011,4,28) *)
