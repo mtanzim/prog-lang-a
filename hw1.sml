@@ -4,10 +4,10 @@
 (* year, month, date *)
 fun is_older (dateA:int*int*int, dateB:int*int*int) = 
    (#1 dateA) < (#1 dateB) 
-      orelse 
-         (#1 dateA) = (#1 dateB) andalso  (#2 dateA) < (#2 dateB) 
-      orelse 
-         (#1 dateA) = (#1 dateB) andalso  (#2 dateA) = (#2 dateB) andalso  (#3 dateA) < (#3 dateB)
+   orelse 
+      (#1 dateA) = (#1 dateB) andalso  (#2 dateA) < (#2 dateB) 
+   orelse 
+      (#1 dateA) = (#1 dateB) andalso  (#2 dateA) = (#2 dateB) andalso  (#3 dateA) < (#3 dateB)
 
 fun oldest(date_list:(int*int*int) list) = 
    if null date_list
