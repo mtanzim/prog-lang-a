@@ -100,7 +100,6 @@ fun number_before_reaching_sum (sum: int, num_list: int list) =
       then ~1
       else
          if hd cur_list + cur_sum >= sum
-         (* then hd cur_list *)
          then cur_pos - 1
          else sum_list(tl cur_list, cur_sum + hd cur_list, cur_pos + 1)
    in
@@ -125,4 +124,15 @@ fun what_month(day: int) =
    ]
    in
       number_before_reaching_sum(day, days_in_month) + 1
+   end
+
+
+fun month_range(range_tuple: int * int) = 
+   let fun append_months(cur_day: int, cur_list: int list) =
+      if cur_day > #2 range_tuple
+      (* rev is allowed? *)
+      then rev cur_list
+      else append_months(cur_day + 1, what_month(cur_day):: cur_list )
+   in 
+      append_months(#1 range_tuple, [])
    end
