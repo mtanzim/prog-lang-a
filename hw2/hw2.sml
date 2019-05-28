@@ -16,11 +16,20 @@ string is not in the list, else return SOME lst where lst is identical to the ar
 is not in it. You may assume the string is in the list at most once. Use same_string, provided to you,
 to compare strings. Sample solution is around 8 lines. *)
 
-fun all_except_option x = 
-    case x of 
-        (_, []) => []
-        | (str_val, first::[]) => [first]
-        | (str_val, first::rest) => first::all_except_option(str_val,rest)
+fun all_except_option x =
+    let fun get_underlying_list y =
+        case y of
+            (_, []) => []
+            | (str_val, first::rest) => 
+                case same_string(first, str_val) of 
+                    false => first::all_except_option(str_val,rest)
+                    | _ => all_except_option(str_val,rest)
+    in
+        case (get_underlying_list x) of 
+            [] => []
+            | lst => lst
+    end
+
 (* you may assume that Num is always used with values 2, 3, ..., 10
    though it will not really come up *)
 datatype suit = Clubs | Diamonds | Hearts | Spades
