@@ -18,11 +18,9 @@ to compare strings. Sample solution is around 8 lines. *)
 
 fun all_except_option x = 
     case x of 
-        (_, []) => 0
-        | (str_val, first::[]) => 1
-        | (str_val, first::rest) => 1 + all_except_option(str_val,rest)
-        (* | (_,_) => 0 *)
-
+        (_, []) => []
+        | (str_val, first::[]) => [first]
+        | (str_val, first::rest) => first::all_except_option(str_val,rest)
 (* you may assume that Num is always used with values 2, 3, ..., 10
    though it will not really come up *)
 datatype suit = Clubs | Diamonds | Hearts | Spades
