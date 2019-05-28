@@ -16,19 +16,18 @@ string is not in the list, else return SOME lst where lst is identical to the ar
 is not in it. You may assume the string is in the list at most once. Use same_string, provided to you,
 to compare strings. Sample solution is around 8 lines. *)
 
-fun all_except_option x =
-    let fun get_underlying_list y =
-        case y of
-            (_, []) => []
-            | (str_val, first::rest) => 
-                case same_string(first, str_val) of 
-                    false => first::all_except_option(str_val,rest)
-                    | _ => all_except_option(str_val,rest)
-    in
-        case (get_underlying_list x) of 
-            [] => []
-            | lst => lst
-    end
+
+fun all_except_option (str_val, xs) =
+    case xs of
+        [] => NONE
+        | first::rest => 
+            if same_string(str_val, first)
+            (* note: word occurs only once *)
+            then SOME rest
+            else case all_except_option(str_val, rest) of
+                NONE => NONE
+                | SOME tail => SOME (first::tail)
+
 
 (* you may assume that Num is always used with values 2, 3, ..., 10
    though it will not really come up *)
