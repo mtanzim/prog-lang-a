@@ -18,17 +18,10 @@ to compare strings. Sample solution is around 8 lines. *)
 
 fun all_except_option x = 
     case x of 
-        (_, []) => NONE
-        | (str_val, first::[]) => 
-            (case same_string(str_val,first) of
-                true => SOME all_except_option(str_val,[])
-                | false => SOME first::all_except_option(str_val,[]))
-        | (str_val, first::rest) => 
-            (case same_string(str_val,first) of
-                true => SOME all_except_option(str_val,rest)
-                | false => SOME first::all_except_option(str_val,rest))
-
-        | (_,_) => NONE
+        (_, []) => 0
+        | (str_val, first::[]) => 1
+        | (str_val, first::rest) => 1 + all_except_option(str_val,rest)
+        (* | (_,_) => 0 *)
 
 (* you may assume that Num is always used with values 2, 3, ..., 10
    though it will not really come up *)
