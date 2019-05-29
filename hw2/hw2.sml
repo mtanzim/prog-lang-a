@@ -36,14 +36,10 @@ fun get_substitutions1(str_lists, str_val) =
                 if same_string(head,str_val)
                 then each_list(rest)
                 else
-                    let fun each_str(cur_str) =
-                        case cur_str of
-                            head_str ^ rest_str => same_string(head_str ^ rest_str, str_val) orelse each_str(rest_str)
-                            | _ => false
-                    in
-                        case each_str (head) of 
-                            _  => head::each_list(rest)
-                    end
+                    case same_string (String.substring(head, 0, Int.min(String.size(head), String.size(str_val) )),
+                        String.substring(str_val, 0, Int.min(String.size(head), String.size(str_val) ))) of
+                        true  => head::each_list(rest)
+                        | _ => each_list(rest)
     in 
         case str_lists of 
             [] => []
