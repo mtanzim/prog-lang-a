@@ -28,6 +28,30 @@ fun all_except_option (str_val, xs) =
                 NONE => NONE
                 | SOME tail => SOME (first::tail)
 
+fun get_substitutions1(str_lists, str_val) = 
+    let fun each_list (str_list) = 
+        case str_list of
+            [] => []
+            | head::rest => 
+                if same_string(head,str_val)
+                then each_list(rest)
+                else
+                    let fun each_str(cur_str) =
+                        case cur_str of
+                            head_str ^ rest_str => same_string(head_str ^ rest_str, str_val) orelse each_str(rest_str)
+                            | _ => false
+                    in
+                        case each_str (head) of 
+                            _  => head::each_list(rest)
+                    end
+    in 
+        case str_lists of 
+            [] => []
+            | head::rest => each_list(head) @ get_substitutions1(rest, str_val)
+    end
+
+        
+
 
 (* you may assume that Num is always used with values 2, 3, ..., 10
    though it will not really come up *)
