@@ -30,16 +30,9 @@ fun all_except_option (str_val, xs) =
 
 fun get_substitutions1(str_lists, str_val) = 
     let fun each_list (str_list) = 
-        case str_list of
-            [] => []
-            | head::rest => 
-                if same_string(head,str_val)
-                then each_list(rest)
-                else
-                    case same_string (String.substring(head, 0, Int.min(String.size(head), String.size(str_val) )),
-                        String.substring(str_val, 0, Int.min(String.size(head), String.size(str_val) ))) of
-                        true  => head::each_list(rest)
-                        | _ => each_list(rest)
+        case all_except_option(str_val, str_list) of
+            NONE => []
+            | SOME lst => lst
     in 
         case str_lists of 
             [] => []
