@@ -39,8 +39,32 @@ fun get_substitutions1(str_lists, str_val) =
             | head::rest => each_list(head) @ get_substitutions1(rest, str_val)
     end
 
-        
+(* cheat for now *)
+fun get_substitutions2(str_lists, str_val) = 
+    let fun each_list (str_list) = 
+        case all_except_option(str_val, str_list) of
+            NONE => []
+            | SOME lst => lst
+    in 
+        case str_lists of 
+            [] => []
+            | head::rest => each_list(head) @ get_substitutions1(rest, str_val)
+    end
+    
 
+fun similar_names(str_lists, r : {first:string,middle:string,last:string}) =
+    let val {first=x,middle=y,last=z} = r
+    in
+        let fun make_list(cur_list) =
+            case cur_list of 
+                [] => []
+                | head::rest => {first=head, last=z, middle=y}::make_list(rest)
+        in 
+            case get_substitutions1(str_lists, x) of
+                [] => [r]
+                | lst => r::make_list(lst)
+        end
+    end
 
 (* you may assume that Num is always used with values 2, 3, ..., 10
    though it will not really come up *)
