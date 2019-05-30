@@ -25,9 +25,16 @@ val test5b = card_color (Spades, Num 3) = Black
 val test5c = card_color (Diamonds, Num 233) = Red
 val test5d = card_color (Hearts, Num 212) = Red
 
-(* val test6 = card_value (Clubs, Num 2) = 2 *)
+val test6a = card_value (Clubs, Num 2) = 2
+val test6b = card_value (Clubs, Num 3) = 3
+val test6c = card_value (Clubs, Num 4) = 4
+val test6d = card_value (Clubs, Num 5) = 5
+val test6e = card_value (Clubs, Ace) = 10
+val test6f = card_value (Clubs, King) = 10
 
-(* val test7 = remove_card ([(Hearts, Ace)], (Hearts, Ace), IllegalMove) = [] *)
+val test7a = remove_card ([(Hearts, Ace)], (Hearts, Ace), IllegalMove) = []
+val test7a = remove_card ([(Hearts, Ace), (Hearts, Queen)], (Hearts, Queen), IllegalMove) = [(Hearts, Ace)]
+(* val test7b = remove_card ([(Hearts, Queen)], (Hearts, Ace), IllegalMove) = IllegalMove *)
 
 (* val test8 = all_same_color [(Hearts, Ace), (Hearts, Ace)] = true *)
 

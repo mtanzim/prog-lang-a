@@ -83,3 +83,28 @@ fun card_color (suit_in, rank_in) =
         Clubs => Black
         | Spades => Black
         | _ => Red
+
+fun card_value (suit_in, rank_in) =
+    case rank_in of 
+        Num i => i
+        | _ => 10
+
+fun remove_card(cs,c, e) = 
+    let fun also_track_isfound (cur_cs, is_found) = 
+        case (cs,is_found) of
+            ([], true) => []
+            | ([], false) => raise e
+            | (head::rest, false) => 
+                if head = c
+                then also_track_isfound(rest, true)
+                else head::also_track_isfound(rest,false)
+            | (head::rest, true) => rest
+    in 
+        also_track_isfound(cs, false)
+    end
+    (* case cs of
+        [] => []
+        | head::rest => 
+            if head = c
+            then remove_card(rest,c, e)
+            else head::remove_card(rest,c, e) *)
