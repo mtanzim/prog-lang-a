@@ -20,7 +20,10 @@ val test4b = similar_names ([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie
 val test4c = similar_names ([], {first="Fred", middle="W", last="Smith"}) =
 	    [{first="Fred", last="Smith", middle="W"}]
 
-(* val test5 = card_color (Clubs, Num 2) = Black *)
+val test5a = card_color (Clubs, Num 2) = Black
+val test5b = card_color (Spades, Num 3) = Black
+val test5c = card_color (Diamonds, Num 233) = Red
+val test5d = card_color (Hearts, Num 212) = Red
 
 (* val test6 = card_value (Clubs, Num 2) = 2 *)
 
