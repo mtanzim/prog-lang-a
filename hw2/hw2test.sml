@@ -57,7 +57,10 @@ val test8i = all_same_color [(Diamonds, Ace), (Spades, Ace), (Hearts, Ace)] = fa
 val test8k = all_same_color [(Diamonds, Ace), (Diamonds, Ace), (Hearts, Ace), (Hearts, Ace)] = true
 val test8l = all_same_color [(Diamonds, Ace), (Diamonds, Ace), (Hearts, Ace), (Spades, Ace)] = false
 
-(* val test9 = sum_cards [(Clubs, Num 2),(Clubs, Num 2)] = 4 *)
+val test9a = sum_cards [(Clubs, Num 2),(Clubs, Num 2)] = 4
+val test9b = sum_cards [(Clubs, Num 4),(Clubs, Ace)] = 14
+val test9c = sum_cards [(Clubs, Ace)] = 10
+val test9d = sum_cards [] = 0
 
 (* val test10 = score ([(Hearts, Num 2),(Clubs, Num 4)],10) = 4 *)
 

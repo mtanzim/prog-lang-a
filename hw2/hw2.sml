@@ -104,7 +104,17 @@ fun remove_card(cs,c, e) =
 fun all_same_color cs = 
     case cs of
         [] => true
-        |head::[] => true
+        | head::[] => true
         | head::neck::rest =>  
-                card_color(head) = card_color(neck) andalso all_same_color(neck::rest) 
+                card_color(head) = card_color(neck) andalso
+                all_same_color(neck::rest) 
         
+fun sum_cards(cs) =
+    let fun sum_inner(cur_cs, cur_sum) = 
+        case cur_cs of
+            [] => cur_sum
+            | head::rest =>
+                sum_inner(rest, card_value(head) + cur_sum)
+        in
+            sum_inner(cs, 0)
+        end
