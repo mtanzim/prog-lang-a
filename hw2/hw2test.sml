@@ -33,7 +33,13 @@ val test6e = card_value (Clubs, Ace) = 10
 val test6f = card_value (Clubs, King) = 10
 
 val test7a = remove_card ([(Hearts, Ace)], (Hearts, Ace), IllegalMove) = []
-val test7a = remove_card ([(Hearts, Ace), (Hearts, Queen)], (Hearts, Queen), IllegalMove) = [(Hearts, Ace)]
+val test7b = remove_card ([(Hearts, Ace), (Hearts, Queen)], (Hearts, Ace), IllegalMove) = [(Hearts, Queen)]
+val test7c = remove_card ([(Hearts, Ace), (Hearts, Queen), (Hearts, Num 2)], (Hearts, Ace), IllegalMove) = [(Hearts, Queen), (Hearts, Num 2)]
+
+(* Only removing the first one works *)
+(* val test7c = remove_card ([(Hearts, Ace), (Hearts, Queen), (Hearts, Num 2)], (Hearts, Queen), IllegalMove) = [(Hearts, Queen), (Hearts, Num 2)] *)
+
+(* val test7b = remove_card ([(Hearts, Ace), (Hearts, Queen), (Hearts, Num 2)], (Hearts, Queen), IllegalMove) = [(Hearts, Ace), (Hearts, Num 2)] *)
 (* val test7b = remove_card ([(Hearts, Queen)], (Hearts, Ace), IllegalMove) = IllegalMove *)
 
 (* val test8 = all_same_color [(Hearts, Ace), (Hearts, Ace)] = true *)
