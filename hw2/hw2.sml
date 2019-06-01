@@ -118,3 +118,14 @@ fun sum_cards(cs) =
         in
             sum_inner(cs, 0)
         end
+
+
+fun score (cs,goal) = 
+    let val sum = sum_cards(cs) 
+    in
+        case ( sum > goal, all_same_color(cs) ) of
+            (true, false) => 3 * (sum - goal)
+            | (false, false) => goal - sum
+            | (true, true) => (3 * (sum - goal)) div 2
+            | (false, true) => (goal - sum) div 2
+    end
