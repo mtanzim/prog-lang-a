@@ -90,28 +90,13 @@ fun card_value (suit_in, rank_in) =
         | _ => 10
 
 fun remove_card(cs,c, e) = 
-    let fun also_track_isfound (cur_cs, is_found) = 
-        case (cs,is_found) of
-            (* ([], true) => []
-            | ([], false) => raise e
-            | ([], true) => [] *)
-            (head::rest, false) => 
-                if head = c
-                then rest
-                else head::also_track_isfound(rest,false)
-            | (head::[], false) => 
-                if head = c
-                then []
-                else raise e
-    in 
-        also_track_isfound(cs, false)
-    end
-    (* case cs of
+    case cs of 
         [] => []
         | head::rest => 
             if head = c
-            then remove_card(rest,c, e)
-            else head::remove_card(rest,c, e) *)
-
-(* fun all_same_color (cs) = 
-    true *)
+            then rest
+            else head::remove_card(rest, c, e)
+        | head::[] => 
+            if head = c
+            then []
+            else raise e
