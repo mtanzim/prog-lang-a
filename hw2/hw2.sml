@@ -100,3 +100,11 @@ fun remove_card(cs,c, e) =
             if head = c
             then []
             else raise e
+
+fun all_same_color cs = 
+    case cs of
+        [] => true
+        |head::[] => true
+        | head::neck::rest =>  
+                card_color(head) = card_color(neck) andalso all_same_color(neck::rest) 
+        
