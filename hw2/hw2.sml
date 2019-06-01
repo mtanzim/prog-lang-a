@@ -78,6 +78,12 @@ datatype move = Discard of card | Draw
 exception IllegalMove
 
 (* put your solutions for problem 2 here *)
+fun get_card_from_discard move =
+    case move of 
+        Discard cur_card => cur_card
+
+
+
 fun card_color (suit_in, rank_in) =
     case suit_in of 
         Clubs => Black
@@ -123,9 +129,31 @@ fun sum_cards(cs) =
 fun score (cs,goal) = 
     let val sum = sum_cards(cs) 
     in
-        case ( sum > goal, all_same_color(cs) ) of
-            (true, false) => 3 * (sum - goal)
-            | (false, false) => goal - sum
-            | (true, true) => (3 * (sum - goal)) div 2
-            | (false, true) => (goal - sum) div 2
+        case ( cs, sum > goal, all_same_color(cs) ) of
+            ([],_,_) => 0
+            | (_ ,true, false) => 3 * (sum - goal)
+            | (_ ,false, false) => goal - sum
+            | (_, true, true) => (3 * (sum - goal)) div 2
+            | (_, false, true) => (goal - sum) div 2
+    end
+
+
+fun officiate (cs, ms, goal) = 
+    let fun track_state (card_pile, cur_ms, held_cards) = 
+        case (card_pile, cur_ms, sum_cards(held_cards) > goal) of
+            ([],_,_) => score(held_cards,goal)
+            | (_,[],_) => score(held_cards,goal)
+            | (_,_,true) => score(held_cards,goal)
+            | _ =>
+                case cur_ms of
+                    head_move::rest_moves => 
+                        case head_move of 
+                            Draw => let val (drawn_card::rest_pile) = card_pile
+                                in
+                                    track_state(rest_pile, rest_moves,drawn_card::held_cards)
+                                end
+                           | Discard discarded_card => 
+                                track_state(card_pile, rest_moves, remove_card(held_cards, discarded_card, IllegalMove))
+    in
+        track_state(cs, ms, [])
     end
