@@ -12,11 +12,13 @@ val test1f = all_except_option ("stringa", ["string","asdsd","asdasd"]) = NONE
 
 val test2a = get_substitutions1 ([["foo"],["there"]], "foo") = []
 val test2b = get_substitutions1([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]], "Fred") = 
-                                    ["Fredrick","Freddie","F"] 
+                                    ["Fredrick","Freddie","F"]
+                                    
 val vtest3a = get_substitutions2 ([["foo"],["there"]], "foo") = []
 val vtest3b = get_substitutions2 ([["foo"],["there"]], "foo") = []
 val vtest3c = get_substitutions2([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]], "Fred") = 
-                                    ["Fredrick","Freddie","F"] 
+                                    ["Fredrick","Freddie","F"]
+
 val test4b = similar_names ([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]], {first="Fred", middle="W", last="Smith"}) =
 	    [{first="Fred", last="Smith", middle="W"}, {first="Fredrick", last="Smith", middle="W"},
 	     {first="Freddie", last="Smith", middle="W"}, {first="F", last="Smith", middle="W"}]

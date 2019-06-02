@@ -29,24 +29,25 @@ fun all_except_option (str_val, xs) =
                 | SOME tail => SOME (first::tail)
 
 fun get_substitutions1(str_lists, str_val) = 
-    let fun each_list (str_list) = 
-        case all_except_option(str_val, str_list) of
-            NONE => []
-            | SOME lst => lst
-    in 
-        case str_lists of 
-            [] => []
-            | head::rest => each_list(head) @ get_substitutions1(rest, str_val)
-    end
-
-(* cheat for now *)
-fun get_substitutions2(str_lists, str_val) = 
     case str_lists of 
         [] => []
         | head::rest => 
             case all_except_option(str_val, head) of 
-                NONE => get_substitutions2(rest, str_val)
+                NONE => get_substitutions1(rest, str_val)
                 | SOME lst => lst @ get_substitutions1(rest, str_val)
+
+(* tail recursive version *)
+fun get_substitutions2(str_lists, str_val) = 
+    let fun inner_sub (cur_list, cur_sub) =
+        case cur_list of 
+            [] => cur_sub
+            | head::rest => 
+                case all_except_option(str_val, head) of 
+                    NONE => inner_sub(rest, cur_sub)
+                    | SOME lst => inner_sub(rest, cur_sub @ lst)
+    in
+        inner_sub(str_lists, [])
+    end
     
 
 fun similar_names(str_lists, r : {first:string,middle:string,last:string}) =
