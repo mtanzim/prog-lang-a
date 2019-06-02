@@ -67,13 +67,20 @@ val utest10a = score ([(Hearts, Num 2),(Clubs, Num 4)],10) = 4
 val utest10b = score ([(Hearts, Num 9),(Clubs, Num 4)],10) = 9
 val utest10c = score ([(Hearts, Num 9),(Diamonds, Num 4)],10) = 4
 val utest10d = score ([(Hearts, Num 2),(Diamonds, Num 4)],10) = 2
+val utest10e = score ([(Hearts, Num 2),(Diamonds, Num 4)],6) = 0
+val utest10f = score ([],89) = 89
 
-val utest11 = officiate ([(Hearts, Num 2),(Clubs, Num 4)],[Draw], 15) = 6
+val utest11a = officiate ([(Hearts, Num 2),(Clubs, Num 4)],[Draw], 15) = 6
+val utest11b = officiate ([(Hearts, Num 2),(Clubs, Num 4)],[], 15) = 15
+val utest11c = officiate ([(Hearts, Num 2)],[Draw,Draw,Draw,Draw], 2) = 0
+val utest11d = officiate ([(Hearts, Num 2)],[Draw,Draw,Draw,Draw], 2) = 0
 
-val utest12 = officiate ([(Clubs,Ace),(Spades,Ace),(Clubs,Ace),(Spades,Ace)],
-                        [Draw,Draw,Draw,Draw,Draw], 42) = 3
+val test12 = officiate ([(Clubs,Ace),(Spades,Ace),(Clubs,Ace),(Spades,Ace)],
+                        [Draw,Draw,Draw,Draw,Draw],
+                        42)
+             = 3
 
-val utest13 = ((officiate([(Clubs,Jack),(Spades,Num(8))],
+val test13 = ((officiate([(Clubs,Jack),(Spades,Num(8))],
                          [Draw,Discard(Hearts,Jack)],
                          42);
                false) 

@@ -14,13 +14,20 @@ score: Your function returns an incorrect result when the sum is exactly equal t
 
 score: Your function returns an incorrect result when you must round the score correctly. [incorrect answer]
 
-score: Your function returns an incorrect result when the input hand is the empty list. [incorrect answer]
+score: Your function returns an incorrect result when the input hand is the empty list. [incorrect answer] [DONE]
 
-officiate: Your function returns an incorrect result when the move list empty. [incorrect answer]
-officiate: Your function returns an incorrect result when the game should end due to an empty card list. [incorrect answer]
+-----------
+
+officiate: Your function returns an incorrect result when the move list empty. [incorrect answer] [DONE]
+
+officiate: Your function returns an incorrect result when the game should end due to an empty card list. [incorrect answer] [DONE]
+
 officiate: Your function returns an incorrect result when the game should end due to the sum of cards in the player's hand exceeding the goal. [incorrect answer]
+
 officiate: the game ends with no more move and the held-cards are of different colors. [incorrect answer]
+
 officiate: the game starts with empty card-list. [incorrect answer]
+
 officiate EXCEPTIONS: Your function does not throw a correct exception when the player attempts to discard card not in their hand. [NO RAISED EXCEPTION]
 3a tests failed to run (most likely caused by an incorrect function signature or unimplemented function in the submission)
 3b tests failed to run (most likely caused by an incorrect function signature or unimplemented function in the submission)
