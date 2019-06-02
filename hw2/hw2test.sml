@@ -13,7 +13,10 @@ val test1f = all_except_option ("stringa", ["string","asdsd","asdasd"]) = NONE
 val test2a = get_substitutions1 ([["foo"],["there"]], "foo") = []
 val test2b = get_substitutions1([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]], "Fred") = 
                                     ["Fredrick","Freddie","F"] 
-val test3 = get_substitutions2 ([["foo"],["there"]], "foo") = []
+val vtest3a = get_substitutions2 ([["foo"],["there"]], "foo") = []
+val vtest3b = get_substitutions2 ([["foo"],["there"]], "foo") = []
+val vtest3c = get_substitutions2([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]], "Fred") = 
+                                    ["Fredrick","Freddie","F"] 
 val test4b = similar_names ([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]], {first="Fred", middle="W", last="Smith"}) =
 	    [{first="Fred", last="Smith", middle="W"}, {first="Fredrick", last="Smith", middle="W"},
 	     {first="Freddie", last="Smith", middle="W"}, {first="F", last="Smith", middle="W"}]
@@ -36,7 +39,6 @@ val test7a = remove_card ([(Hearts, Ace)], (Hearts, Ace), IllegalMove) = []
 val test7b = remove_card ([(Hearts, Ace), (Hearts, Queen)], (Hearts, Ace), IllegalMove) = [(Hearts, Queen)]
 val test7c = remove_card ([(Hearts, Ace), (Hearts, Queen), (Hearts, Num 2)], (Hearts, Ace), IllegalMove) = [(Hearts, Queen), (Hearts, Num 2)]
 
-(* Only removing the first one works *)
 val test7d = remove_card ([(Hearts, Ace), (Hearts, Queen), (Hearts, Num 2)], (Hearts, Queen), IllegalMove) = [(Hearts, Ace), (Hearts, Num 2)]
 val test7e = remove_card ([(Hearts, Ace), (Hearts, Queen), (Hearts, Num 2)], (Hearts, Num 2), IllegalMove) = [(Hearts, Ace), (Hearts, Queen)]
 val test7f = remove_card ([], (Hearts, Num 2), IllegalMove) = []
@@ -75,12 +77,12 @@ val utest11b = officiate ([(Hearts, Num 2),(Clubs, Num 4)],[], 15) = 15
 val utest11c = officiate ([(Hearts, Num 2)],[Draw,Draw,Draw,Draw], 2) = 0
 val utest11d = officiate ([(Hearts, Num 2)],[Draw,Draw,Draw,Draw], 2) = 0
 
-val test12 = officiate ([(Clubs,Ace),(Spades,Ace),(Clubs,Ace),(Spades,Ace)],
+val utest12 = officiate ([(Clubs,Ace),(Spades,Ace),(Clubs,Ace),(Spades,Ace)],
                         [Draw,Draw,Draw,Draw,Draw],
                         42)
              = 3
 
-val test13 = ((officiate([(Clubs,Jack),(Spades,Num(8))],
+val utest13 = ((officiate([(Clubs,Jack),(Spades,Num(8))],
                          [Draw,Discard(Hearts,Jack)],
                          42);
                false) 

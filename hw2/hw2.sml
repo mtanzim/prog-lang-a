@@ -41,15 +41,12 @@ fun get_substitutions1(str_lists, str_val) =
 
 (* cheat for now *)
 fun get_substitutions2(str_lists, str_val) = 
-    let fun each_list (str_list) = 
-        case all_except_option(str_val, str_list) of
-            NONE => []
-            | SOME lst => lst
-    in 
-        case str_lists of 
-            [] => []
-            | head::rest => each_list(head) @ get_substitutions1(rest, str_val)
-    end
+    case str_lists of 
+        [] => []
+        | head::rest => 
+            case all_except_option(str_val, head) of 
+                NONE => get_substitutions2(rest, str_val)
+                | SOME lst => lst @ get_substitutions1(rest, str_val)
     
 
 fun similar_names(str_lists, r : {first:string,middle:string,last:string}) =
