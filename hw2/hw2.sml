@@ -93,6 +93,7 @@ fun card_color (suit_in, rank_in) =
 fun card_value (suit_in, rank_in) =
     case rank_in of 
         Num i => i
+        | Ace => 11
         | _ => 10
 
 fun remove_card(cs,c, e) = 

@@ -29,7 +29,7 @@ val test6a = card_value (Clubs, Num 2) = 2
 val test6b = card_value (Clubs, Num 3) = 3
 val test6c = card_value (Clubs, Num 4) = 4
 val test6d = card_value (Clubs, Num 5) = 5
-val test6e = card_value (Clubs, Ace) = 10
+val test6e = card_value (Clubs, Ace) = 11
 val test6f = card_value (Clubs, King) = 10
 
 val test7a = remove_card ([(Hearts, Ace)], (Hearts, Ace), IllegalMove) = []
@@ -59,8 +59,8 @@ val test8k = all_same_color [(Diamonds, Ace), (Diamonds, Ace), (Hearts, Ace), (H
 val test8l = all_same_color [(Diamonds, Ace), (Diamonds, Ace), (Hearts, Ace), (Spades, Ace)] = false
 
 val test9a = sum_cards [(Clubs, Num 2),(Clubs, Num 2)] = 4
-val test9b = sum_cards [(Clubs, Num 4),(Clubs, Ace)] = 14
-val test9c = sum_cards [(Clubs, Ace)] = 10
+val test9b = sum_cards [(Clubs, Num 4),(Clubs, Ace)] = 15
+val test9c = sum_cards [(Clubs, Ace)] = 11
 val test9d = sum_cards [] = 0
 
 val utest10a = score ([(Hearts, Num 2),(Clubs, Num 4)],10) = 4
@@ -72,8 +72,6 @@ val utest11 = officiate ([(Hearts, Num 2),(Clubs, Num 4)],[Draw], 15) = 6
 
 val utest12 = officiate ([(Clubs,Ace),(Spades,Ace),(Clubs,Ace),(Spades,Ace)],
                         [Draw,Draw,Draw,Draw,Draw], 42) = 3
-                        (* why is this 3? *)
-
 
 val utest13 = ((officiate([(Clubs,Jack),(Spades,Num(8))],
                          [Draw,Discard(Hearts,Jack)],
