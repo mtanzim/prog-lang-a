@@ -101,11 +101,13 @@ fun remove_card(cs,c, e) =
         | head::rest => 
             if head = c
             then rest
-            else head::remove_card(rest, c, e)
-        | head::[] => 
+            else 
+                case rest of [] => raise e
+                | _ => head::remove_card(rest, c, e)
+        (* | head::[] => 
             if head = c
             then []
-            else raise e
+            else raise e *)
 
 fun all_same_color cs = 
     case cs of

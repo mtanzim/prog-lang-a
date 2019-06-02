@@ -40,7 +40,8 @@ val test7c = remove_card ([(Hearts, Ace), (Hearts, Queen), (Hearts, Num 2)], (He
 val test7d = remove_card ([(Hearts, Ace), (Hearts, Queen), (Hearts, Num 2)], (Hearts, Queen), IllegalMove) = [(Hearts, Ace), (Hearts, Num 2)]
 val test7e = remove_card ([(Hearts, Ace), (Hearts, Queen), (Hearts, Num 2)], (Hearts, Num 2), IllegalMove) = [(Hearts, Ace), (Hearts, Queen)]
 val test7f = remove_card ([], (Hearts, Num 2), IllegalMove) = []
-(* val test7f = remove_card ([(Hearts, Ace), (Hearts, Queen), (Hearts, Num 2)], (Hearts, Num 4), IllegalMove) handle IllegalMove => true = true *)
+(* val test7g = (remove_card ([(Hearts, Ace), (Hearts, Queen), (Hearts, Num 2)], (Hearts, Num 4), IllegalMove))
+    handle IllegalMove => true *)
 
 (* val test7b = remove_card ([(Hearts, Ace), (Hearts, Queen), (Hearts, Num 2)], (Hearts, Queen), IllegalMove) = [(Hearts, Ace), (Hearts, Num 2)] *)
 (* val test7b = remove_card ([(Hearts, Queen)], (Hearts, Ace), IllegalMove) = IllegalMove *)
@@ -70,9 +71,9 @@ val utest10d = score ([(Hearts, Num 2),(Diamonds, Num 4)],10) = 2
 val utest11 = officiate ([(Hearts, Num 2),(Clubs, Num 4)],[Draw], 15) = 6
 
 val utest12 = officiate ([(Clubs,Ace),(Spades,Ace),(Clubs,Ace),(Spades,Ace)],
-                        [Draw,Draw,Draw,Draw,Draw],
-                        42) = 3 
+                        [Draw,Draw,Draw,Draw,Draw], 42) = 3
                         (* why is this 3? *)
+
 
 val utest13 = ((officiate([(Clubs,Jack),(Spades,Num(8))],
                          [Draw,Discard(Hearts,Jack)],
