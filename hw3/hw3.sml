@@ -29,6 +29,7 @@ fun g f1 f2 p =
 
 fun only_capitals xs = List.filter (fn x => Char.isUpper (String.sub(x,0)) ) xs
 
+fun longest_string1 xs = List.foldl (fn (x, y) => case (String.size x > String.size y ) of true => x | _ => y ) "" xs
 
 (**** for the challenge problem only ****)
 
