@@ -27,7 +27,8 @@ fun g f1 f2 p =
     end
 
 
-fun only_capitals xs = List.filter (fn x => Char.isUpper (String.sub(x,0)) ) xs
+fun only_capitals xs =
+	List.filter (fn x => Char.isUpper (String.sub(x,0)) ) xs
 
 fun longest_string1 xs = 
 	List.foldl (fn (x, y) => case (String.size x > String.size y ) of true => x | _ => y ) "" xs
@@ -40,6 +41,9 @@ fun longest_string_helper f xs =
 fun longest_string3 xs = longest_string_helper (fn (a, b) => a > b) xs
 fun longest_string4 xs = longest_string_helper (fn (a, b) => a >= b) xs
 
+val longest_capitalized = longest_string3 o only_capitals
+
+val rev_string = String.implode o List.rev o String.explode
 (**** for the challenge problem only ****)
 
 datatype typ = Anything
