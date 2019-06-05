@@ -14,12 +14,29 @@ val test2a = longest_string1 ["A","bc","C"] = "bc"
 val test2b = longest_string1 [] = ""
 val test2c = longest_string1 ["asdasdasd"] = "asdasdasd"
 val test2d = longest_string1 ["A","bc","DC"] = "bc"
+
+val test3a = longest_string2 ["A","bc","C"] = "bc"
+val test3b = longest_string2 [] = ""
+val test3c = longest_string2 ["asdasdasd"] = "asdasdasd"
+val test3d = longest_string2 ["A","bc","DC"] = "DC"
+
+
+val test4a = longest_string3 ["A","bc","C"] = "bc"
+val test4b = longest_string3 [] = ""
+val test4c = longest_string3 ["asdasdasd"] = "asdasdasd"
+val test4d = longest_string3 ["A","bc","DC"] = "bc"
+
+
+val test4aa = longest_string4 ["A","bc","C"] = "bc"
+val test4bb = longest_string4 [] = ""
+val test4cc = longest_string4 ["asdasdasd"] = "asdasdasd"
+val test4dd = longest_string4 ["A","bc","DC"] = "DC"
+
 (*  *)
-(* val test3 = longest_string2 ["A","bc","C"] = "bc" *)
 (*  *)
-(* val test4a = longest_string3 ["A","bc","C"] = "bc" *)
+val test4aaa = longest_string3 ["A","bc","C"] = "bc"
 (*  *)
-(* val test4b = longest_string4 ["A","B","C"] = "C" *)
+(* val test4bbb = longest_string4 ["A","B","C"] = "C" *)
 (*  *)
 (* val test5 = longest_capitalized ["A","bc","C"] = "A" *)
 (*  *)
