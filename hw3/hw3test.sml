@@ -49,9 +49,16 @@ val test6a = rev_string "abc" = "cba"
 val test6b = rev_string "abcadasdasdaczxczcqcqwqe2134234234" = String.rev "abcadasdasdaczxczcqcqwqe2134234234"
 val test6c = rev_string "" = ""
 (*  *)
-(* val test7 = first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3,4,5] = 4 *)
+val test7a = first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3,4,5] = 4
+val test7b = first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3,12,5] = 12
+val test7c = first_answer (fn x => if x > 0 then SOME x else NONE) [1,2,3,12,5] = 1
+val test7d = first_answer (fn x => if x = 5 then SOME x else NONE) [1,2,3,12,5] = 5
+val test7e = (first_answer (fn x => if x = 5 then SOME x else NONE) [1,2,3,12,13] = 5) 
+    handle NoAnswer => true = true
 (*  *)
-(* val test8 = all_answers (fn x => if x = 1 then SOME [x] else NONE) [2,3,4,5,6,7] = NONE *)
+val test8a = all_answers (fn x => if x = 1 then SOME [x] else NONE) [2,3,4,5,6,7] = NONE
+val test8b = all_answers (fn x => if x = 1 then SOME [x] else NONE) [1,1,1,1,1,1] = SOME [1,1,1,1,1,1]
+val test8b = all_answers (fn x => if x = 1 then SOME [x] else NONE) [1,1,1,1,1,1] = SOME [1,1,1,1,1,1]
 (*  *)
 (* val test9a = count_wildcards Wildcard = 1 *)
 (*  *)

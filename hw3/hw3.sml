@@ -44,6 +44,25 @@ fun longest_string4 xs = longest_string_helper (fn (a, b) => a >= b) xs
 val longest_capitalized = longest_string3 o only_capitals
 
 val rev_string = String.implode o List.rev o String.explode
+
+fun first_answer f xs =
+	case xs of 
+		[] => raise NoAnswer
+		| head::rest => case (f head) of 
+			SOME y => y
+			| NONE => first_answer f rest
+
+fun all_answers f xs = 
+	let fun inner (cur_xs, acc) =
+		case cur_xs of 
+			[] => SOME acc
+			| head::rest => case (f head) of 
+				SOME [y] => inner(rest, [y] @ acc)
+				| NONE => NONE
+	in
+		inner(xs, [])
+	end
+
 (**** for the challenge problem only ****)
 
 datatype typ = Anything
