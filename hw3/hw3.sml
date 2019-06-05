@@ -26,6 +26,10 @@ fun g f1 f2 p =
 	  | _                 => 0
     end
 
+
+fun only_capitals xs = List.filter (fn x => Char.isUpper (String.sub(x,0)) ) xs
+
+
 (**** for the challenge problem only ****)
 
 datatype typ = Anything
