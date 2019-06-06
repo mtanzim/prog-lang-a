@@ -58,13 +58,22 @@ val test7e = (first_answer (fn x => if x = 5 then SOME x else NONE) [1,2,3,12,13
 (*  *)
 val test8a = all_answers (fn x => if x = 1 then SOME [x] else NONE) [2,3,4,5,6,7] = NONE
 val test8b = all_answers (fn x => if x = 1 then SOME [x] else NONE) [1,1,1,1,1,1] = SOME [1,1,1,1,1,1]
-val test8b = all_answers (fn x => if x = 1 then SOME [x] else NONE) [1,1,1,1,1,1] = SOME [1,1,1,1,1,1]
+val test8c = all_answers (fn x => if x = 1 then SOME [x] else NONE) [1,1,1,1,1,1] = SOME [1,1,1,1,1,1]
 (*  *)
-(* val test9a = count_wildcards Wildcard = 1 *)
+val test9aa = count_wildcards Wildcard = 1
+val test9ab =  count_wildcards(ConstructorP("test",Variable("Wildcard"))) = 0
+(* https://raw.githubusercontent.com/Ajwah/Programming-Languages/master/hw3/johnson_hw3_test.sml *)
+val test9ac = count_wildcards(ConstructorP("test",TupleP[Wildcard,Wildcard,UnitP,Wildcard,Variable("Wildcard"),Wildcard,Wildcard,ConstP(2)])) = 5
 (*  *)
-(* val test9b = count_wild_and_variable_lengths (Variable("a")) = 1 *)
+val test9b = count_wild_and_variable_lengths (Variable("a")) = 1
+val test9ba = count_wild_and_variable_lengths (Variable("")) = 0
+val test9bb = count_wild_and_variable_lengths (Variable("adasd")) = String.size "adasd"
+(* https://raw.githubusercontent.com/Ajwah/Programming-Languages/master/hw3/johnson_hw3_test.sml *)
+val test9bc =  count_wild_and_variable_lengths(TupleP([Variable("Test"),Wildcard])) = 5
 (*  *)
-(* val test9c = count_some_var ("x", Variable("x")) = 1 *)
+val test9ca = count_some_var ("x", Variable("x")) = 1
+val test9cb = count_some_var ("y", Variable("x")) = 0
+val test9cc = count_some_var ("", Variable("x")) = 0
 (*  *)
 (* val test10 = check_pat (Variable("x")) = true *)
 (*  *)
