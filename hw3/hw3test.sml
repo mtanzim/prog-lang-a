@@ -3,6 +3,10 @@
 (* To run the test, add a new line to the top of this file: use "homeworkname.sml"; *)
 (* All the tests should evaluate to true. For example, the REPL should say: val test1 = true : bool *)
 
+(* Many test cases taken from here:
+https://raw.githubusercontent.com/Ajwah/Programming-Languages/master/hw3/johnson_hw3_test.sml *)
+
+
 use "hw3.sml";
 val test1a = only_capitals ["A","B","C"] = ["A","B","C"]
 val test1b = only_capitals ["A","B","C", "d"] = ["A","B","C"]
@@ -92,10 +96,32 @@ val test91c = make_var_list (Wildcard)= []
 
 val test92a = no_dup ["test", "", "dates", "Wert"] = true
 val test92b = no_dup ["test", "test", "dates", "Wert"] = false
+val test92c = no_dup [] = true
 
 
 
-(* val test10 = check_pat (Variable("x")) = true *)
+val test10a = check_pat (Variable("x")) = true
+
+val test10b = check_pat(Wildcard) = false
+val test10c= check_pat(Variable("unique")) = true
+
+val test10d = check_pat(ConstP(3)) = false (* failing *)
+val test10e = check_pat(UnitP) = false (* failing *)
+val test10f = check_pat(TupleP[]) = false (* failing *)
+
+val test10g = check_pat(TupleP[Variable("unique"),Wildcard]) = true
+
+val test10h = check_pat(TupleP([Wildcard,UnitP])) = false (* failing *)
+
+val test10i = check_pat(TupleP([Wildcard,Wildcard,UnitP,Wildcard,Variable("Wildcard"),Wildcard,Wildcard,ConstP(2)])) = true
+val test10j = check_pat(ConstructorP("test",ConstructorP("test2",TupleP[Wildcard,Wildcard,UnitP,Wildcard,Variable("Wildcard"),Wildcard,Wildcard,ConstP(2)]))) = true
+val test10k = check_pat(TupleP([Variable("Test1"),Variable("Test2")])) = true
+val test10l =  check_pat(TupleP([Variable("Test1"),Wildcard,Variable("Test2")])) = true
+val test10m =  check_pat(TupleP([Variable("Test1"),ConstructorP("Wildcard",Wildcard),Variable("Test2")])) = true
+val test10n =  check_pat(ConstructorP("Test",TupleP([Variable("duplicate"),TupleP([ConstructorP("test2",Variable("duplicate")),Variable("unique"),Variable("qwerty")])]))) = false
+val test10o =  check_pat(ConstructorP("sdfs",TupleP([Variable("A"),Variable("B"),ConstP(4),TupleP[Variable("C"),ConstructorP("sds",UnitP)],ConstructorP("dfg",TupleP[Variable("D"),Variable("E"),ConstP(4)])]))) = true
+
+
 (*  *)
 (* val test11 = match (Const(1), UnitP) = NONE *)
 (*  *)  

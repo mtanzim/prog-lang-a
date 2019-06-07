@@ -45,7 +45,7 @@ fun make_var_list p =
 		| ConstructorP(_,p) => make_var_list p
 		| _ => []
 
-(* fun check_pat p =  *)
+fun check_pat p = no_dup (make_var_list p)
 
 
 fun count_some_var (s,p) =
