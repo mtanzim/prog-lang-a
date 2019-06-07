@@ -31,10 +31,22 @@ fun count_wildcards p =
 	
 fun count_wild_and_variable_lengths p = 
 	g (fn () => 1) (String.size) p
-	(* let val wild = g (fn () => 1)
-	in
-		wild (fn _ => 0) p + wild (String.size) p
-	end *)
+
+
+fun no_dup xs = 
+	case xs of 
+		[] => true
+		| head::rest => ((List.exists (fn x => x = head) rest) <> true) andalso check_dup rest
+
+fun make_var_list p = 
+	case p of 
+		Variable x => x::[]	
+		| TupleP ps => List.foldl (fn (cur_p,acc) => acc @ (make_var_list cur_p) ) [] ps
+		| ConstructorP(_,p) => make_var_list p
+		| _ => []
+
+(* fun check_pat p =  *)
+
 
 fun count_some_var (s,p) =
 	g (fn () => 0) (fn x => if (x = s) then 1 else 0 ) p

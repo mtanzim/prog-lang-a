@@ -75,7 +75,26 @@ val test9bd = count_wild_and_variable_lengths(TupleP([Variable("Test1"),Construc
 val test9ca = count_some_var ("x", Variable("x")) = 1
 val test9cb = count_some_var ("y", Variable("x")) = 0
 val test9cc = count_some_var ("", Variable("x")) = 0
+(* https://raw.githubusercontent.com/Ajwah/Programming-Languages/master/hw3/johnson_hw3_test.sml *)
+val test9cd = count_some_var ("test",Variable("test")) = 1
+val test9ce = count_some_var ("dates",Wildcard) = 0
+val test9cf = count_some_var ("dates",ConstP(3)) = 0
+val test9cg = count_some_var ("setad",UnitP) = 0
+val test9ch = count_some_var ("wert",TupleP[Wildcard,Variable("test"),Variable(""),Variable("dates"),ConstP(2),Variable("Wert")]) = 0
+val test9ci = count_some_var ("",TupleP[Wildcard,Variable("test"),Variable(""),Variable("dates"),ConstP(2),Variable("Wert")]) = 1
+val test9cj = count_some_var ("test",TupleP[Wildcard,Variable("test"),Variable(""),Variable("dates"),ConstP(2),Variable("Wert")]) = 1
+val test9ck = count_some_var ("Wert",TupleP[Wildcard,Variable("test"),Variable(""),Variable("dates"),ConstP(2),Variable("Wert")]) = 1
 (*  *)
+val test91a = make_var_list (TupleP[Wildcard,Variable("test"),Variable(""),Variable("dates"),ConstP(2),Variable("Wert")]) = ["test", "", "dates", "Wert"]
+
+val test91b = make_var_list (Variable("test"))= ["test"]
+val test91c = make_var_list (Wildcard)= []
+
+val test92a = no_dup ["test", "", "dates", "Wert"] = true
+val test92b = no_dup ["test", "test", "dates", "Wert"] = false
+
+
+
 (* val test10 = check_pat (Variable("x")) = true *)
 (*  *)
 (* val test11 = match (Const(1), UnitP) = NONE *)
