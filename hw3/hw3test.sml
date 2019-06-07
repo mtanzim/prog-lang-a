@@ -70,6 +70,7 @@ val test9ba = count_wild_and_variable_lengths (Variable("")) = 0
 val test9bb = count_wild_and_variable_lengths (Variable("adasd")) = String.size "adasd"
 (* https://raw.githubusercontent.com/Ajwah/Programming-Languages/master/hw3/johnson_hw3_test.sml *)
 val test9bc =  count_wild_and_variable_lengths(TupleP([Variable("Test"),Wildcard])) = 5
+val test9bd = count_wild_and_variable_lengths(TupleP([Variable("Test1"),ConstructorP("Wildcard",Wildcard),Variable("Test2")])) = 11
 (*  *)
 val test9ca = count_some_var ("x", Variable("x")) = 1
 val test9cb = count_some_var ("y", Variable("x")) = 0
@@ -78,6 +79,6 @@ val test9cc = count_some_var ("", Variable("x")) = 0
 (* val test10 = check_pat (Variable("x")) = true *)
 (*  *)
 (* val test11 = match (Const(1), UnitP) = NONE *)
-(*  *)
+(*  *)  
 (* val test12 = first_match Unit [UnitP] = SOME [] *)
 

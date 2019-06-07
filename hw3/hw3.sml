@@ -30,10 +30,11 @@ fun count_wildcards p =
 	g (fn () => 1) (fn _ => 0) p
 	
 fun count_wild_and_variable_lengths p = 
-	let val wild = g (fn () => 1)
+	g (fn () => 1) (String.size) p
+	(* let val wild = g (fn () => 1)
 	in
 		wild (fn _ => 0) p + wild (String.size) p
-	end
+	end *)
 
 fun count_some_var (s,p) =
 	g (fn () => 0) (fn x => if (x = s) then 1 else 0 ) p
