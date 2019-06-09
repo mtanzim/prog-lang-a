@@ -62,7 +62,7 @@ val test7e = (first_answer (fn x => if x = 5 then SOME x else NONE) [1,2,3,12,13
 (*  *)
 val test8a = all_answers (fn x => if x = 1 then SOME [x] else NONE) [2,3,4,5,6,7] = NONE
 val test8b = all_answers (fn x => if x = 1 then SOME [x] else NONE) [1,1,1,1,1,1] = SOME [1,1,1,1,1,1]
-val test8c = all_answers (fn x => if x = 1 then SOME [x] else NONE) [1,1,1,1,1,1] = SOME [1,1,1,1,1,1]
+val test8c = all_answers (fn x => if x = 1 then SOME [x] else NONE) [1,1,1,1,3,1] = NONE
 (*  *)
 val test9aa = count_wildcards Wildcard = 1
 val test9ab =  count_wildcards(ConstructorP("test",Variable("Wildcard"))) = 0
@@ -135,6 +135,25 @@ val test11h = match (Const(1), ConstP 2) = NONE
 val test11i = match (Const(1), ConstructorP("a", UnitP)) = NONE
 val test11j = match (Constructor("a", Unit), ConstructorP("a", UnitP)) = SOME []
 val test11k = match (Constructor("a", Unit), ConstructorP("a", Variable "a")) = SOME[("a", Unit)]
+
+(* https://github.com/ksaveljev/Programming-Languages/blob/master/hw3/hw3_test.sml *)
+
+fun f n = if n = 6 then NONE else SOME [n]
+val all_answers_test1 = all_answers f [] = SOME []
+val all_answers_test2 = all_answers f [1] = SOME [1]
+val all_answers_test3 = all_answers f [1,2,3] = SOME[3,2,1]
+val all_answers_test4 = all_answers f [1,2,6,3] = NONE
+
+
+val match_test20 = match(Constructor("hi", Const 1), TupleP[ConstP 1]) = NONE
+val match_test21 = match(Tuple[Unit], TupleP[UnitP, UnitP]) = NONE
+val match_test22 = match(Tuple[Unit, Unit], TupleP[UnitP]) = NONE
+val match_test23 = match(Tuple[Const 1], TupleP[UnitP]) = NONE
+val match_test24 = match(Tuple[Const 1], TupleP[ConstP 2]) = NONE
+val match_test26 = match(Tuple[Unit], TupleP[Variable "hi"]) = SOME [("hi", Unit)]
+val match_test25 = match(Tuple[Const (1)], TupleP[ConstP 1]) = SOME []
+val match_test27 = match(Tuple[Constructor("hi", Const 1)], TupleP[ConstructorP("hi", ConstP 1)]) = SOME []
+
 (*  *)  
 (* val test12 = first_match Unit [UnitP] = SOME [] *)
 
