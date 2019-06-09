@@ -36,7 +36,7 @@ fun count_wild_and_variable_lengths p =
 fun no_dup xs = 
 	case xs of 
 		[] => true
-		| head::rest => ((List.exists (fn x => x = head) rest) <> true) andalso check_dup rest
+		| head::rest => ((List.exists (fn x => x = head) rest) <> true) andalso no_dup rest
 
 fun make_var_list p = 
 	case p of 
@@ -46,6 +46,24 @@ fun make_var_list p =
 		| _ => []
 
 fun check_pat p = no_dup (make_var_list p)
+
+fun match (v,p) = 
+	case p of
+		Wildcard => SOME []
+		| Variable x => SOME [(x,v)]
+		| UnitP =>
+			(case v of 
+				Unit => SOME[]
+				| _ => NONE)
+		| ConstP x => 
+			(case v of 
+				Const y => if x = y then SOME[] else NONE
+				| _ => NONE)
+		| ConstructorP (nameP, pat) => 
+			(case v of
+				Constructor (nameV, valll) => (if nameP = nameV then match(valll, pat) else NONE)
+				| _ => NONE)
+		| _ => NONE
 
 
 fun count_some_var (s,p) =

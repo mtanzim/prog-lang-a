@@ -102,16 +102,11 @@ val test92c = no_dup [] = true
 
 val test10a = check_pat (Variable("x")) = true
 
-val test10b = check_pat(Wildcard) = false
 val test10c= check_pat(Variable("unique")) = true
 
-val test10d = check_pat(ConstP(3)) = false (* failing *)
-val test10e = check_pat(UnitP) = false (* failing *)
-val test10f = check_pat(TupleP[]) = false (* failing *)
 
 val test10g = check_pat(TupleP[Variable("unique"),Wildcard]) = true
 
-val test10h = check_pat(TupleP([Wildcard,UnitP])) = false (* failing *)
 
 val test10i = check_pat(TupleP([Wildcard,Wildcard,UnitP,Wildcard,Variable("Wildcard"),Wildcard,Wildcard,ConstP(2)])) = true
 val test10j = check_pat(ConstructorP("test",ConstructorP("test2",TupleP[Wildcard,Wildcard,UnitP,Wildcard,Variable("Wildcard"),Wildcard,Wildcard,ConstP(2)]))) = true
@@ -121,9 +116,25 @@ val test10m =  check_pat(TupleP([Variable("Test1"),ConstructorP("Wildcard",Wildc
 val test10n =  check_pat(ConstructorP("Test",TupleP([Variable("duplicate"),TupleP([ConstructorP("test2",Variable("duplicate")),Variable("unique"),Variable("qwerty")])]))) = false
 val test10o =  check_pat(ConstructorP("sdfs",TupleP([Variable("A"),Variable("B"),ConstP(4),TupleP[Variable("C"),ConstructorP("sds",UnitP)],ConstructorP("dfg",TupleP[Variable("D"),Variable("E"),ConstP(4)])]))) = true
 
+(* Do the folloing cases matter? They don't contain any variables. They are failing *)
+(* val test10b = check_pat(Wildcard) = false 
+val test10d = check_pat(ConstP(3)) = false 
+val test10e = check_pat(UnitP) = false 
+val test10f = check_pat(TupleP[]) = false 
+val test10h = check_pat(TupleP([Wildcard,UnitP])) = false  *)
 
 (*  *)
-(* val test11 = match (Const(1), UnitP) = NONE *)
+(* val test11a = match (Const(1), UnitP) = NONE *)
+val test11b = match (Const(1), Wildcard) = SOME[]
+val test11c = match (Unit, Wildcard) = SOME[]
+val test11d = match (Unit, Variable "a") = SOME[("a", Unit)]
+val test11e = match (Unit, UnitP) = SOME[]
+val test11f = match (Const(1), UnitP) = NONE
+val test11g = match (Const(1), ConstP 1) = SOME []
+val test11h = match (Const(1), ConstP 2) = NONE
+val test11i = match (Const(1), ConstructorP("a", UnitP)) = NONE
+val test11j = match (Constructor("a", Unit), ConstructorP("a", UnitP)) = SOME []
+val test11k = match (Constructor("a", Unit), ConstructorP("a", Variable "a")) = SOME[("a", Unit)]
 (*  *)  
 (* val test12 = first_match Unit [UnitP] = SOME [] *)
 
