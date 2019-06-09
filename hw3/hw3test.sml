@@ -151,9 +151,18 @@ val match_test22 = match(Tuple[Unit, Unit], TupleP[UnitP]) = NONE
 val match_test23 = match(Tuple[Const 1], TupleP[UnitP]) = NONE
 val match_test24 = match(Tuple[Const 1], TupleP[ConstP 2]) = NONE
 val match_test26 = match(Tuple[Unit], TupleP[Variable "hi"]) = SOME [("hi", Unit)]
+
 val match_test25 = match(Tuple[Const (1)], TupleP[ConstP 1]) = SOME []
 val match_test27 = match(Tuple[Constructor("hi", Const 1)], TupleP[ConstructorP("hi", ConstP 1)]) = SOME []
 
+(* https://github.com/ksaveljev/Programming-Languages/blob/master/hw3/hw3_test.sml *)
+fun f n = if n = 6 then NONE else SOME n
+val first_answer_test1 = (first_answer f []; false) handle NoAnswer => true
+val first_answer_test2 = first_answer f [1] = 1
+val first_answer_test3 = first_answer f [6,6,3,6] = 3
+val first_answer_test4 = (first_answer f [6,6,6,6]; false) handle NoAnswer => true
+val first_answer_test5 = first_answer f [3,4,5,6] = 3
+
 (*  *)  
-(* val test12 = first_match Unit [UnitP] = SOME [] *)
+val test12 = first_match Unit [UnitP] = SOME []
 

@@ -52,12 +52,7 @@ val longest_capitalized = longest_string3 o only_capitals
 
 val rev_string = String.implode o List.rev o String.explode
 
-fun first_answer f xs =
-	case xs of 
-		[] => raise NoAnswer
-		| head::rest => case (f head) of 
-			SOME y => y
-			| NONE => first_answer f rest
+
 
 
 fun count_wildcards p = 
@@ -81,6 +76,12 @@ fun make_var_list p =
 
 fun check_pat p = no_dup (make_var_list p)
 
+fun first_answer f xs =
+	case xs of 
+		[] => raise NoAnswer
+		| head::rest => case (f head) of 
+			SOME y => y
+			| NONE => first_answer f rest
 
 fun all_answers f xs = 
 	let fun inner (cur_xs, acc) =
@@ -116,8 +117,14 @@ fun match (v,p) =
 					if (List.length vps <> List.length ps) then NONE else
 						all_answers match (ListPair.zip(vps, ps))
 				| _ => NONE)
-		(* | _ => NONE *)
 
+fun curry f x y = f (x,y)
+fun first_match v ps =
+	let val each_match = curry match v
+	in
+		 SOME [first_answer each_match ps]
+
+	end
 
 (**** for the challenge problem only ****)
 
