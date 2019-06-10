@@ -28,39 +28,31 @@ fun g f1 f2 p =
 
 
 
+val only_capitals = List.filter (fn x => Char.isUpper (String.sub(x,0)) )
 
-
-
-fun count_some_var (s,p) =
-	g (fn () => 0) (fn x => if (x = s) then 1 else 0 ) p
-
-fun only_capitals xs =
-	List.filter (fn x => Char.isUpper (String.sub(x,0)) ) xs
-
-fun longest_string1 xs = 
-	List.foldl (fn (x, y) => case (String.size x > String.size y ) of true => x | _ => y ) "" xs
-fun longest_string2 xs = 
-	List.foldl (fn (x, y) => case (String.size x >= String.size y ) of true => x | _ => y ) "" xs
+val longest_string1  = 
+	List.foldl (fn (x, y) => case (String.size x > String.size y ) of true => x | _ => y ) ""
+val longest_string2 = 
+	List.foldl (fn (x, y) => case (String.size x >= String.size y ) of true => x | _ => y ) "" 
 
 fun longest_string_helper f xs = 
 	List.foldl (fn (x, y) => case f(String.size x, String.size y) of true => x | _ => y ) "" xs
 
-fun longest_string3 xs = longest_string_helper (fn (a, b) => a > b) xs
-fun longest_string4 xs = longest_string_helper (fn (a, b) => a >= b) xs
+val longest_string3  = longest_string_helper (fn (a, b) => a > b) 
+val longest_string4  = longest_string_helper (fn (a, b) => a >= b) 
 
 val longest_capitalized = longest_string3 o only_capitals
 
 val rev_string = String.implode o List.rev o String.explode
 
-
-
-
-fun count_wildcards p = 
-	g (fn () => 1) (fn _ => 0) p
+val count_wildcards = 
+	g (fn () => 1) (fn _ => 0)
 	
-fun count_wild_and_variable_lengths p = 
-	g (fn () => 1) (String.size) p
+val count_wild_and_variable_lengths = 
+	g (fn () => 1) (String.size)
 
+fun count_some_var (s,p) =
+	g (fn () => 0) (fn x => if (x = s) then 1 else 0 ) p
 
 fun no_dup xs = 
 	case xs of 
@@ -73,6 +65,8 @@ fun make_var_list p =
 		| TupleP ps => List.foldl (fn (cur_p,acc) => acc @ (make_var_list cur_p) ) [] ps
 		| ConstructorP(_,p) => make_var_list p
 		| _ => []
+
+
 
 fun check_pat p = no_dup (make_var_list p)
 
@@ -88,8 +82,7 @@ fun all_answers f xs =
 		case cur_xs of 
 			[] => SOME acc
 			| head::rest => case (f head) of 
-				SOME [y] => inner(rest, [y] @ acc)
-				| SOME [] => inner(rest, [] @ acc)
+				SOME y => inner(rest, y @ acc)
 				| NONE => NONE
 	in
 		inner(xs, [])
@@ -118,20 +111,25 @@ fun match (v,p) =
 						all_answers match (ListPair.zip(vps, ps))
 				| _ => NONE)
 
-fun curry f x y = f (x,y)
+
+(* old sol *)
+(* fun curry f x y = f (x,y)
 fun first_match v ps =
 	let val each_match = curry match v
 	in
 		 SOME [first_answer each_match ps]
 
-	end
+	end *)
+
+fun first_match v ps = 
+	SOME (first_answer (fn pat => match (v,pat)) ps )
+	handle NoAnswer => NONE
+
 
 (**** for the challenge problem only ****)
-
 datatype typ = Anything
 	     | UnitT
 	     | IntT
 	     | TupleT of typ list
 	     | Datatype of string
-
 (**** you can put all your code here ****)
